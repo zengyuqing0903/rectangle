@@ -1,4 +1,4 @@
-/* global $: true */
+/* global $ rectangle: true */
 /**
  * 小数点后面保留第 n 位
  *
