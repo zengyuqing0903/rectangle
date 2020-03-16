@@ -22,10 +22,12 @@ $(function(){
     var w = Number($width.val()),
         h = Number($height.val());
     // calculate
-    var p = 2 * (w + h),
-        a = w * h;
+    var rect = rectangle();
+    // decimalsave
+    var p = roundFractional(rect.perimeter(w,h),2);
+    var a = roundFractional(rect.area(w,h),2);
     // output
-    $perimeter.val(roundFractional(p,2));
-    $area.val(roundFractional(a,2));
+    $perimeter.val(p);
+    $area.val(a);
   });
 });  
