@@ -3,6 +3,9 @@ div{
   margin: 50px auto;
   width: 370px;
 }
+span {
+  color: red;
+}
 #calculate{
   margin-left: 62px;
   width: 70px;

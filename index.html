@@ -2,17 +2,19 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=0">
   <title>Document</title>
   <link rel="stylesheet" href="./rectangle.css">
 </head>
 <body>
   <div>
     <label>宽度：</label>
-    <input id="width" type="text">
+    <input id="width" type="text" autofocus>
+    <span>*</span>
     <br>
     <label>高度：</label>
     <input id="height" type="text">
+    <span>*</span>
     <br>  
     <input id="calculate" type="button" value="计算">
     <br>  
@@ -23,7 +25,9 @@
     <input id="area" type="text" disabled>
   </div>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <!-- build:js bundle.min.js -->
   <script src="./util.js"></script>
   <script src="./rectangle.js"></script>
+  <!-- endbuild -->
 </body>
 </html> 
