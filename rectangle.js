@@ -18,6 +18,9 @@ $(function(){
       $area = $('#area');
   /**calc button click event */
   $btn.click(function(){
+    // 集中校验
+    if(!validate('#width') || !validate('#height')) return;
+
     // get value
     var w = Number($width.val()),
         h = Number($height.val());
@@ -30,4 +33,38 @@ $(function(){
     $perimeter.val(p);
     $area.val(a);
   });
+// 字段级校验
+  $width.focusout(function(){
+    if(!validate('#width')) $width.select();
+  });
+
+  $height.focusout(function(){
+    if(!validate('#height')) $height.select();
+  });
+  function validate(field){
+    var $data = $(field),
+        name=$data.attr('data-label')
+        $msg = $(field + '-validation-message');
+    // validate null
+    if($data.val() === ''){
+      $msg.html(name+'不能为空！');
+      $data.select();
+      return false
+    }
+    // validate number
+    if(!(/^-?(0|[1-9]\d*)(\.\d*)?([eE][+-]?\d+)?$/.test($data.val()))){
+      $msg.html(name+'必须是数值！');
+      $data.select();
+      return false
+    }
+    // validate > 0
+    if(Number($data.val()) < 0){
+      $msg.html(name+'必须大于零！');
+      $data.select();
+      return false
+    }
+    
+    $msg.html('');
+    return true;
+  }
 });  
