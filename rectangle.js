@@ -1,4 +1,4 @@
-/* global $ rectangle: true */
+/* global $ rectangle, validate: true */
 /**
  * 小数点后面保留第 n 位
  *
@@ -16,11 +16,34 @@ $(function(){
       $btn = $('#calculate'),
       $perimeter = $('#perimeter'),
       $area = $('#area');
+      $widthValidate = $('#width-validation-message'),
+      $heightValidate = $('#height-validation-message'),
+      isPassValidate = false;
+  // 字段级校验
+  $width.focusout(function() {
+    var result = validate($width.val());
+    isPassValidate = result.isOK;
+    if(!result.isOK) {
+      $widthValidate.html('宽度' + result.reason);
+      $width.select();
+    } else {
+      $widthValidate.html('');
+    }
+  });
+  $height.focusout(function() {
+    var result = validate($height.val());
+    isPassValidate = result.isOK;
+    if(!result.isOK) {
+      $heightValidate.html('高度' + result.reason);
+      $height.select();
+    } else {
+      $heightValidate.html('');
+    }
+  });
   /**calc button click event */
   $btn.click(function(){
     // 集中校验
-    if(!validate('#width') || !validate('#height')) return;
-
+    if(!isPassValidate) return;
     // get value
     var w = Number($width.val()),
         h = Number($height.val());
@@ -33,38 +56,4 @@ $(function(){
     $perimeter.val(p);
     $area.val(a);
   });
-// 字段级校验
-  $width.focusout(function(){
-    if(!validate('#width')) $width.select();
-  });
-
-  $height.focusout(function(){
-    if(!validate('#height')) $height.select();
-  });
-  function validate(field){
-    var $data = $(field),
-        name=$data.attr('data-label')
-        $msg = $(field + '-validation-message');
-    // validate null
-    if($data.val() === ''){
-      $msg.html(name+'不能为空！');
-      $data.select();
-      return false
-    }
-    // validate number
-    if(!(/^-?(0|[1-9]\d*)(\.\d*)?([eE][+-]?\d+)?$/.test($data.val()))){
-      $msg.html(name+'必须是数值！');
-      $data.select();
-      return false
-    }
-    // validate > 0
-    if(Number($data.val()) < 0){
-      $msg.html(name+'必须大于零！');
-      $data.select();
-      return false
-    }
-    
-    $msg.html('');
-    return true;
-  }
 });  
