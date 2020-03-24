@@ -19,6 +19,9 @@ $(function(){
       $widthValidate = $('#width-validation-message'),
       $heightValidate = $('#height-validation-message'),
       isPassValidate = false;
+    
+  $forkMeGH.show("https://github.com/zengyuqing0903/rectangle");
+  $bszPageFooter.show("body");
 
   // 字符校验
   
