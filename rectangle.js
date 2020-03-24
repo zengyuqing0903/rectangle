@@ -1,4 +1,4 @@
-/* global $ rectangle, validate: true */
+/* global $ rectangle, validate,checkKey: true */
 /**
  * 小数点后面保留第 n 位
  *
@@ -19,6 +19,23 @@ $(function(){
       $widthValidate = $('#width-validation-message'),
       $heightValidate = $('#height-validation-message'),
       isPassValidate = false;
+
+  // 字符校验
+  
+  $width.keypress(function(e){
+    var con = e.target.value,
+        pos = e.target.selectionStart;
+    if(!checkKey(e.key,con,pos)) {
+      e.preventDefault();
+    }
+  });
+  $height.keypress(function(e){
+    var con = e.target.value,
+        pos = e.target.selectionStart;
+    if(!checkKey(e.key,con,pos)) {
+      e.preventDefault();
+    }
+  });
   // 字段级校验
   $width.focusout(function() {
     var result = validate($width.val());
